@@ -4,22 +4,15 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>&lt;my-element> Demo</title>
+	<title>Web components demo</title>
 	<script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 	<script src="../node_modules/lit/polyfill-support.js"></script>
-	<script type="module" src="./build/my-element.js"></script>
-	<style>
-		p {
-			border: solid 1px blue;
-			padding: 8px;
-		}
-	</style>
+	<script type="module" src="./build/mty-element.js"></script>
 </head>
 
 <body>
-	<my-element>
-		<p>This is child content</p>
-	</my-element>
+	<mty-input labelContent="First name" name="firstName"></mty-input>
+	<mty-input labelContent="Last name" name="lastName"></mty-input>
 </body>
 
 </html>
