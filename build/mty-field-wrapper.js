@@ -6,39 +6,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-let MtyElement = class MtyElement extends LitElement {
+let MtyFieldWrapper = class MtyFieldWrapper extends LitElement {
     constructor() {
-        super(...arguments);
-        this.value = '';
-        this.labelContent = 'Input:';
-        this.name = 'mty-input';
+        super();
+        this.name = Math.random().toString(36).substring(7);
     }
     render() {
         return html `
-			<div style="margin-bottom: .5em">
+			<div class="field-container">
 				<label for="${this.name}">${this.labelContent}</label>
-				<input @change="${this._onChange}" name="${this.name}" type="text" value="${this.value}"/>
-				<button @click="${this._onClick}">Submit</button>
+				<slot></slot>
+				<div class="helperText-container">
+					<span class="helperText">${this.helperText}</span>
+				</div>
 			</div>
 		`;
-    }
-    _onClick() {
-        alert(this.value);
-    }
-    _onChange(e) {
-        this.value = e.target.value;
     }
 };
 __decorate([
     property({ type: String })
-], MtyElement.prototype, "value", void 0);
+], MtyFieldWrapper.prototype, "name", void 0);
 __decorate([
     property({ type: String })
-], MtyElement.prototype, "labelContent", void 0);
+], MtyFieldWrapper.prototype, "labelContent", void 0);
 __decorate([
     property({ type: String })
-], MtyElement.prototype, "name", void 0);
-MtyElement = __decorate([
-    customElement('mty-input')
-], MtyElement);
-export { MtyElement };
+], MtyFieldWrapper.prototype, "helperText", void 0);
+__decorate([
+    property({ type: Boolean })
+], MtyFieldWrapper.prototype, "isError", void 0);
+__decorate([
+    property({ type: Boolean })
+], MtyFieldWrapper.prototype, "isRequired", void 0);
+__decorate([
+    property({ type: Boolean })
+], MtyFieldWrapper.prototype, "isDisabled", void 0);
+MtyFieldWrapper = __decorate([
+    customElement('mty-field-wrapper')
+], MtyFieldWrapper);
+export { MtyFieldWrapper };
