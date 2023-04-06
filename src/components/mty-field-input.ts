@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { FieldInputEnum } from '../interfaces/FieldInput.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
 
@@ -9,11 +10,11 @@ export class MtyFieldInput extends LitElement {
 	constructor() {
 		super();
 
-		this.type = 'text';
+		this.type = FieldInputEnum.Text;
 	}
 
 	@property({ type: String })
-	type: 'text' | 'number' | 'email' | 'password';
+	type: FieldInputEnum;
 
 	@property({ type: String })
 	value?: string;

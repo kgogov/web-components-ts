@@ -1,6 +1,7 @@
 export enum FieldInputEnum {
-	'text',
-	'number',
-	'email',
-	'password'
+	Text = 'text',
+	Number = 'number',
+	Email = 'email',
+	Pass = 'password',
+	Date = 'date'
 }
