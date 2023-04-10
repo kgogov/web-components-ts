@@ -6,7 +6,7 @@ export const fieldsData: FieldInput[] = [
 		name: 'firstName',
 		labelContent: 'First name',
 		type: FieldInputEnum.Text,
-		value: '',
+		value: 'Ivan',
 		placeholder: 'Enter your first name',
 	}, {
 		name: 'middleName',
@@ -15,16 +15,18 @@ export const fieldsData: FieldInput[] = [
 		isError: true,
 		isRequired: true,
 		type: FieldInputEnum.Text,
+		value: 'Petrov',
 		placeholder: 'Enter your middle name',
 	}, {
 		name: 'lastName',
 		labelContent: 'Last name',
 		isRequired: true,
 		type: FieldInputEnum.Text,
-		value: 'Petrov',
+		value: 'Ivanovich',
 		placeholder: 'Enter your last name',
 	}, {
 		name: 'age',
+		value: '25',
 		labelContent: 'Age',
 		isRequired: true,
 		type: FieldInputEnum.Number,

@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { FieldInputEnum } from '../interfaces/FieldInput.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
+import { FieldInput } from '../interfaces/FieldInput.Interface';
 
 @customElement('mty-field-input')
 export class MtyFieldInput extends LitElement {
@@ -12,6 +13,9 @@ export class MtyFieldInput extends LitElement {
 
 		this.type = FieldInputEnum.Text;
 	}
+
+	@property({ type: Object })
+	config?: FieldInput;
 
 	@property({ type: String })
 	type: FieldInputEnum;
@@ -30,6 +34,10 @@ export class MtyFieldInput extends LitElement {
 
 	private _onChange(e: Event) {
 		this.value = (e.target as HTMLInputElement).value;
+	}
+
+	override firstUpdated() {
+		Object.assign(this, this.config);
 	}
 
 	override render() {
