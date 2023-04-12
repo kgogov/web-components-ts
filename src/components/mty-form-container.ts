@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { fieldsData } from '../data';
 import { FieldInput } from '../interfaces/FieldInput.Interface';
+import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';
 import { MtyFieldInput } from './mty-field-input';
 import './mty-field-input';
 
@@ -12,13 +13,21 @@ export class MtyFormContainer extends LitElement {
 		super();
 	}
 
-	public getData() {
-		const data: Record<string, string> = {};
+	public validateData() {
+		const data = this.getData();
+		return FormDataSchema.parse(data);
+	}
+
+	public getData(): Partial<FormData>  {
+		const data: FormData = {} as FormData;
 		this.shadowRoot?.querySelectorAll('mty-field-input').forEach(({name, value}: MtyFieldInput) => {
+			if (!name || !value) return;
+
 			Object.assign(data, {
 				[name]: value
 			});
 		});
+
 		return data;
 	}
 

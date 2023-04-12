@@ -15,7 +15,6 @@ export const fieldsData: FieldInput[] = [
 		isError: true,
 		isRequired: true,
 		type: FieldInputEnum.Text,
-		value: 'Petrov',
 		placeholder: 'Enter your middle name',
 	}, {
 		name: 'lastName',
