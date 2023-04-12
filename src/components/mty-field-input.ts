@@ -12,6 +12,7 @@ export class MtyFieldInput extends LitElement {
 		super();
 
 		this.type = FieldInputEnum.Text;
+		this.name = '';
 	}
 
 	@property({ type: Object })
@@ -22,6 +23,9 @@ export class MtyFieldInput extends LitElement {
 
 	@property({ type: String })
 	value?: string;
+
+	@property({ type: String })
+	name: string;
 
 	@property({ type: String })
 	placeholder?: string;
@@ -42,8 +46,9 @@ export class MtyFieldInput extends LitElement {
 
 	override render() {
 		return html`
-			<mty-field-wrapper .labelContent="${this.labelContent}">
+			<mty-field-wrapper .config=${this.config}>
 				<input @change="${this._onChange}"
+					   name="${this.name}"
 					   type="${this.type}"
 					   value="${this.value ?? ''}"
 					   placeholder="${this.placeholder ?? ''}"/>

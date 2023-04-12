@@ -24,6 +24,12 @@ export const fieldsData: FieldInput[] = [
 		type: FieldInputEnum.Text,
 		value: 'Ivanovich',
 		placeholder: 'Enter your last name',
+	},{
+		name: 'email',
+		labelContent: 'Email',
+		type: FieldInputEnum.Email,
+		value: 'asd@abv.bg',
+		placeholder: 'Enter your email',
 	}, {
 		name: 'age',
 		value: '25',

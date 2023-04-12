@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { FieldWrapper } from '../interfaces/FieldWrapper.Interface';
 
 @customElement('mty-field-wrapper')
 export class MtyFieldWrapper extends LitElement {
@@ -9,6 +10,9 @@ export class MtyFieldWrapper extends LitElement {
 
 		this.name = Math.random().toString(36).substring(7);
 	}
+
+	@property({ type: Object })
+	config?: FieldWrapper;
 
 	@property({ type: String })
 	name: string;
@@ -27,6 +31,10 @@ export class MtyFieldWrapper extends LitElement {
 
 	@property({ type: Boolean })
 	isDisabled?: boolean;
+
+	override firstUpdated() {
+		Object.assign(this, this.config);
+	}
 
 	override render() {
 		return html`
