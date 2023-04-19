@@ -27,7 +27,7 @@ export class MtyFieldWrapper extends LitElement {
 	`;
 
 	@property({ type: Object })
-	config?: FieldWrapper;
+	initialConfig?: FieldWrapper;
 
 	@property({ type: String })
 	name: string;
@@ -59,7 +59,7 @@ export class MtyFieldWrapper extends LitElement {
 	}
 
 	override firstUpdated() {
-		Object.assign(this, this.config);
+		Object.assign(this, this.initialConfig);
 	}
 
 	override render() {

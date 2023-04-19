@@ -6,14 +6,11 @@ export const fieldsData: FieldInput[] = [
 		name: 'firstName',
 		labelContent: 'First name',
 		type: FieldInputEnum.Text,
-		value: 'Ivan',
 		placeholder: 'Enter your first name',
+		isRequired : true
 	}, {
 		name: 'middleName',
 		labelContent: 'Middle name',
-		helperText: 'This field is required',
-		isError: true,
-		isRequired: true,
 		type: FieldInputEnum.Text,
 		placeholder: 'Enter your middle name',
 	}, {

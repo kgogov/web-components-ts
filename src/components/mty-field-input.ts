@@ -28,7 +28,7 @@ export class MtyFieldInput extends LitElement {
 	`;
 
 	@property({ type: Object })
-	config?: FieldInput;
+	initialConfig?: FieldInput;
 
 	@property({ type: String })
 	type: FieldInputEnum;
@@ -45,8 +45,17 @@ export class MtyFieldInput extends LitElement {
 	@property({ type: String })
 	labelContent?: string;
 
+	@property({ type: String })
+	helperText?: string;
+
 	@property({ type: Boolean })
 	isDisabled?: boolean;
+
+	@property({ type: Boolean })
+	isError?: boolean;
+
+	@property({ type: Boolean })
+	isRequired?: boolean;
 
 	@property({ type: Function })
 	onChange?: (e: Event) => void;
@@ -56,12 +65,20 @@ export class MtyFieldInput extends LitElement {
 	}
 
 	override firstUpdated() {
-		Object.assign(this, this.config);
+		Object.assign(this, this.initialConfig);
 	}
 
 	override render() {
 		return html`
-			<mty-field-wrapper .config=${this.config}>
+			<mty-field-wrapper
+				.initialConfig=${this.initialConfig}
+				name=${this.name}
+				labelContent=${this.labelContent}
+				helperText=${this.helperText}
+				?isError=${this.isError}
+				?isRequired=${this.isRequired}
+				?isDisabled=${this.isDisabled}>
+
 				<input @change="${this._onChange}"
 					   name="${this.name}"
 					   type="${this.type}"

@@ -13,6 +13,8 @@ export class MtyFormContainer extends LitElement {
 		super();
 	}
 
+	private formFields: NodeListOf<MtyFieldInput> | null = null;
+
 	static override styles: CSSResult = css`
 		:host form {
 			display: grid;
@@ -28,12 +30,29 @@ export class MtyFormContainer extends LitElement {
 
 	public validateData() {
 		const data = this.getData();
-		return FormDataSchema.parse(data);
+		const validationResult = FormDataSchema.safeParse(data);
+
+		if (validationResult.success) {
+			this.getAllFormFields().forEach((field: MtyFieldInput) => {
+				field.isError = false;
+				field.helperText = '';
+			});
+		} else {
+			validationResult.error.issues.forEach(({ path, message }) => {
+				const field = this.getFormFieldByName(path.join());
+				if (field) {
+					field.isError = true;
+					field.helperText = message;
+				}
+			});
+		}
+
+		return validationResult;
 	}
 
 	public getData(): Partial<FormData> {
 		const data: FormData = {} as FormData;
-		this.shadowRoot?.querySelectorAll('mty-field-input').forEach(({ name, value }: MtyFieldInput) => {
+		this.getAllFormFields().forEach(({ name, value }: MtyFieldInput) => {
 			if (!name || !value) return;
 
 			Object.assign(data, {
@@ -44,14 +63,24 @@ export class MtyFormContainer extends LitElement {
 		return data;
 	}
 
+	public getAllFormFields(): NodeListOf<MtyFieldInput> {
+		if (!this.formFields || this.formFields?.length === 0) {
+			this.formFields = this.renderRoot.querySelectorAll('mty-field-input');
+		}
+
+		return this.formFields as NodeListOf<MtyFieldInput>;
+	}
+
+	public getFormFieldByName(name: string): MtyFieldInput | undefined {
+		return Array.from(this.getAllFormFields()).find(field => field.name === name);
+	}
+
 	override render() {
 		return html`
 			<form>
 				${fieldsData.map((field: FieldInput) => {
-			return html`
-						<mty-field-input .config=${field}></mty-field-input>
-					`;
-		})}
+					return html`<mty-field-input .initialConfig=${field}></mty-field-input>`;
+				})}
 			</form>
 		`;
 	}
