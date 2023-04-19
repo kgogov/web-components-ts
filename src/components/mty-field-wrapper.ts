@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { FieldWrapper } from '../interfaces/FieldWrapper.Interface';
 
@@ -10,6 +10,21 @@ export class MtyFieldWrapper extends LitElement {
 
 		this.name = Math.random().toString(36).substring(7);
 	}
+
+	static override styles: CSSResult = css`
+		:host label {
+			display: block;
+		}
+		:host .error {
+			color: red;
+		}
+		:host .disabled {
+			opacity: 0.5;
+		}
+		:host .helperText-container .helperText {
+			font-size: 0.8em;
+		}
+	`;
 
 	@property({ type: Object })
 	config?: FieldWrapper;
@@ -32,14 +47,25 @@ export class MtyFieldWrapper extends LitElement {
 	@property({ type: Boolean })
 	isDisabled?: boolean;
 
+	private getFieldClasses(): string {
+		const classes: string[] = ['field-container'];
+		if (this.isError) classes.push('error');
+		if (this.isDisabled) classes.push('disabled');
+		return classes.join(' ');
+	}
+
+	private addRequiredStar(): string {
+		return this.isRequired ? '*' : '';
+	}
+
 	override firstUpdated() {
 		Object.assign(this, this.config);
 	}
 
 	override render() {
 		return html`
-			<div class="field-container">
-				<label for="${this.name}">${this.labelContent}</label>
+			<div class="${this.getFieldClasses()}">
+				<label for="${this.name}">${this.labelContent}${this.addRequiredStar()}</label>
 				<slot></slot>
 				<div class="helperText-container">
 					<span class="helperText">${this.helperText}</span>

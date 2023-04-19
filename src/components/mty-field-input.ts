@@ -15,6 +15,18 @@ export class MtyFieldInput extends LitElement {
 		this.name = '';
 	}
 
+	static override styles = css`
+		:host input {
+			font-size: inherit;
+			font-family: inherit;
+			box-sizing: border-box;
+			padding: 0.5em;
+			width: 100%;
+			border: solid 1px gray;
+			border-radius: 0.2em;
+		}
+	`;
+
 	@property({ type: Object })
 	config?: FieldInput;
 
@@ -32,6 +44,9 @@ export class MtyFieldInput extends LitElement {
 
 	@property({ type: String })
 	labelContent?: string;
+
+	@property({ type: Boolean })
+	isDisabled?: boolean;
 
 	@property({ type: Function })
 	onChange?: (e: Event) => void;
@@ -51,7 +66,8 @@ export class MtyFieldInput extends LitElement {
 					   name="${this.name}"
 					   type="${this.type}"
 					   value="${this.value ?? ''}"
-					   placeholder="${this.placeholder ?? ''}"/>
+					   placeholder="${this.placeholder ?? ''}"
+					   ?disabled=${this.isDisabled} />
 			</mty-field-wrapper>
 		`;
 	}
