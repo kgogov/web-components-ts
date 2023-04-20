@@ -75,6 +75,20 @@ export class MtyFormContainer extends LitElement {
 		return Array.from(this.getAllFormFields()).find(field => field.name === name);
 	}
 
+	override connectedCallback() {
+		super.connectedCallback();
+		this.addEventListener('mty-input-change', this._handleInputChange);
+	}
+
+	override disconnectedCallback() {
+		super.disconnectedCallback();
+		this.removeEventListener('mty-input-change', this._handleInputChange);
+	}
+
+	private _handleInputChange = () => {
+		this.validateData();
+	}
+
 	override render() {
 		return html`
 			<form>

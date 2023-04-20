@@ -62,6 +62,12 @@ export class MtyFieldInput extends LitElement {
 
 	private _onChange(e: Event) {
 		this.value = (e.target as HTMLInputElement).value;
+
+		this.dispatchEvent(new CustomEvent('mty-input-change', {
+			bubbles: true,
+			composed: true,
+			detail: {}
+		}));
 	}
 
 	override firstUpdated() {
