@@ -1,4 +1,4 @@
-export enum FieldInputEnum {
+export enum FieldTypeEnum {
 	Text = 'text',
 	Number = 'number',
 	Email = 'email',

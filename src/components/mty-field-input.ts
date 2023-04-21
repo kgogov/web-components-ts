@@ -1,17 +1,17 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { FieldInputEnum } from '../interfaces/FieldInput.Enum';
+import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
-import { FieldInput } from '../interfaces/FieldInput.Interface';
+import { MtyFieldWrapper } from './mty-field-wrapper';
 
 @customElement('mty-field-input')
-export class MtyFieldInput extends LitElement {
+export class MtyFieldInput extends MtyFieldWrapper {
 
 	constructor() {
 		super();
 
-		this.type = FieldInputEnum.Text;
+		this.type = FieldTypeEnum.Text;
 		this.name = '';
 	}
 
@@ -27,35 +27,14 @@ export class MtyFieldInput extends LitElement {
 		}
 	`;
 
-	@property({ type: Object })
-	initialConfig?: FieldInput;
-
 	@property({ type: String })
-	type: FieldInputEnum;
+	type: FieldTypeEnum;
 
 	@property({ type: String })
 	value?: string;
 
 	@property({ type: String })
-	name: string;
-
-	@property({ type: String })
 	placeholder?: string;
-
-	@property({ type: String })
-	labelContent?: string;
-
-	@property({ type: String })
-	helperText?: string;
-
-	@property({ type: Boolean })
-	isDisabled?: boolean;
-
-	@property({ type: Boolean })
-	isError?: boolean;
-
-	@property({ type: Boolean })
-	isRequired?: boolean;
 
 	@property({ type: Function })
 	onChange?: (e: Event) => void;
@@ -63,7 +42,7 @@ export class MtyFieldInput extends LitElement {
 	private _onChange(e: Event) {
 		this.value = (e.target as HTMLInputElement).value;
 
-		this.dispatchEvent(new CustomEvent('mty-input-change', {
+		this.dispatchEvent(new CustomEvent('mty-field-change', {
 			bubbles: true,
 			composed: true,
 			detail: {}

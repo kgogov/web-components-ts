@@ -1,10 +1,11 @@
 import { LitElement, html, css, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { fieldsData } from '../data';
-import { FieldInput } from '../interfaces/FieldInput.Interface';
+import { Field } from '../interfaces/Field.Interface';
 import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';
 import { MtyFieldInput } from './mty-field-input';
 import './mty-field-input';
+import { ZodIssue } from 'zod';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -31,21 +32,19 @@ export class MtyFormContainer extends LitElement {
 	public validateData() {
 		const data = this.getData();
 		const validationResult = FormDataSchema.safeParse(data);
+		const invalidFields: ZodIssue[] = validationResult.success ? [] : validationResult.error.issues;
 
-		if (validationResult.success) {
-			this.getAllFormFields().forEach((field: MtyFieldInput) => {
+		this.getAllFormFields().forEach((field: MtyFieldInput) => {
+			const current: ZodIssue | undefined = invalidFields.find(({ path }) => path.join() === field.name);
+
+			if (current) {
+				field.isError = true;
+				field.helperText = current.message;
+			} else {
 				field.isError = false;
 				field.helperText = '';
-			});
-		} else {
-			validationResult.error.issues.forEach(({ path, message }) => {
-				const field = this.getFormFieldByName(path.join());
-				if (field) {
-					field.isError = true;
-					field.helperText = message;
-				}
-			});
-		}
+			}
+		});
 
 		return validationResult;
 	}
@@ -77,22 +76,22 @@ export class MtyFormContainer extends LitElement {
 
 	override connectedCallback() {
 		super.connectedCallback();
-		this.addEventListener('mty-input-change', this._handleInputChange);
+		this.addEventListener('mty-field-change', this._handleFieldChange);
 	}
 
 	override disconnectedCallback() {
 		super.disconnectedCallback();
-		this.removeEventListener('mty-input-change', this._handleInputChange);
+		this.removeEventListener('mty-field-change', this._handleFieldChange);
 	}
 
-	private _handleInputChange = () => {
+	private _handleFieldChange = () => {
 		this.validateData();
 	}
 
 	override render() {
 		return html`
 			<form>
-				${fieldsData.map((field: FieldInput) => {
+				${fieldsData.map((field: Field) => {
 					return html`<mty-field-input .initialConfig=${field}></mty-field-input>`;
 				})}
 			</form>

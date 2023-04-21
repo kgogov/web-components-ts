@@ -1,29 +1,29 @@
-import { FieldInput } from "./interfaces/FieldInput.Interface";
-import { FieldInputEnum } from "./interfaces/FieldInput.Enum";
+import { FieldInput } from "./interfaces/Field.Interface";
+import { FieldTypeEnum } from "./interfaces/FieldType.Enum";
 
 export const fieldsData: FieldInput[] = [
 	{
 		name: 'firstName',
 		labelContent: 'First name',
-		type: FieldInputEnum.Text,
+		type: FieldTypeEnum.Text,
 		placeholder: 'Enter your first name',
 		isRequired : true
 	}, {
 		name: 'middleName',
 		labelContent: 'Middle name',
-		type: FieldInputEnum.Text,
+		type: FieldTypeEnum.Text,
 		placeholder: 'Enter your middle name',
 	}, {
 		name: 'lastName',
 		labelContent: 'Last name',
 		isRequired: true,
-		type: FieldInputEnum.Text,
+		type: FieldTypeEnum.Text,
 		value: 'Ivanovich',
 		placeholder: 'Enter your last name',
 	},{
 		name: 'email',
 		labelContent: 'Email',
-		type: FieldInputEnum.Email,
+		type: FieldTypeEnum.Email,
 		value: 'asd@abv.bg',
 		placeholder: 'Enter your email',
 	}, {
@@ -31,14 +31,14 @@ export const fieldsData: FieldInput[] = [
 		value: '25',
 		labelContent: 'Age',
 		isRequired: true,
-		type: FieldInputEnum.Number,
+		type: FieldTypeEnum.Number,
 		placeholder: 'How old are you?',
 	}, {
 		name: 'date',
 		labelContent: 'Date',
 		isRequired: true,
 		isDisabled: true,
-		type: FieldInputEnum.Date,
+		type: FieldTypeEnum.Date,
 		value: '2023-04-05',
 	}
 ];

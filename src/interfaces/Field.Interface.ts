@@ -1,8 +1,8 @@
 import { FieldWrapper } from './FieldWrapper.Interface';
-import { FieldInputEnum } from './FieldInput.Enum';
+import { FieldTypeEnum } from './FieldType.Enum';
 
-export interface FieldInput extends FieldWrapper {
-	type: FieldInputEnum;
+export interface Field extends FieldWrapper {
+	type: FieldTypeEnum;
 	name: string;
 	value?: string;
 	placeholder?: string;
