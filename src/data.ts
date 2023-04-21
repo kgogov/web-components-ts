@@ -1,8 +1,12 @@
-import { FieldInput } from "./interfaces/Field.Interface";
+import { Field } from "./interfaces/Field.Interface";
 import { FieldTypeEnum } from "./interfaces/FieldType.Enum";
 
-export const fieldsData: FieldInput[] = [
+export const fieldsData: Field[] = [
 	{
+		name: 'personalInfo',
+		labelContent: 'Personal information',
+		type: FieldTypeEnum.Title,
+	}, {
 		name: 'firstName',
 		labelContent: 'First name',
 		type: FieldTypeEnum.Text,

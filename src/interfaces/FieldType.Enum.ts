@@ -1,7 +1,15 @@
 export enum FieldTypeEnum {
+	Title = 'title',
 	Text = 'text',
 	Number = 'number',
 	Email = 'email',
 	Pass = 'password',
-	Date = 'date'
+	Date = 'date',
+	Select = 'select',
+	Switch = 'switch',
+	WorkingHours = 'working-hours',
+	Radio = 'radio',
+	Checkbox = 'checkbox',
+	Rating = 'rating',
+	BarcodeScanner = 'barcodeScanner',
 }

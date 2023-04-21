@@ -6,6 +6,8 @@ import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';
 import { MtyFieldInput } from './mty-field-input';
 import './mty-field-input';
 import { ZodIssue } from 'zod';
+import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
+import "@ui5/webcomponents/dist/Title.js";
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -26,6 +28,14 @@ export class MtyFormContainer extends LitElement {
 			max-width: 800px;
 			margin: 5em auto;
 			border-radius: 0.2em;
+		}
+
+		:host form .error {
+			color: red;
+		}
+
+		:host form .section-title {
+			grid-column: 1 / -1;
 		}
 	`;
 
@@ -84,15 +94,29 @@ export class MtyFormContainer extends LitElement {
 		this.removeEventListener('mty-field-change', this._handleFieldChange);
 	}
 
-	private _handleFieldChange = () => {
+	private _handleFieldChange() {
 		this.validateData();
+	}
+
+	private renderField(field: Field) {
+		switch (field.type) {
+			case FieldTypeEnum.Text:
+			case FieldTypeEnum.Number:
+			case FieldTypeEnum.Email:
+			case FieldTypeEnum.Date:
+				return html`<mty-field-input .initialConfig=${field}></mty-field-input>`;
+			case FieldTypeEnum.Title:
+				return html`<ui5-title level="H2" class="section-title">${field.labelContent}</ui5-title>`;
+			default:
+				return html`<div class="error">Type not supported: ${field.type}</div>`
+		}
 	}
 
 	override render() {
 		return html`
 			<form>
 				${fieldsData.map((field: Field) => {
-					return html`<mty-field-input .initialConfig=${field}></mty-field-input>`;
+					return this.renderField(field);
 				})}
 			</form>
 		`;
