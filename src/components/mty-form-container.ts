@@ -8,6 +8,7 @@ import './mty-field-input';
 import { ZodIssue } from 'zod';
 import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import "@ui5/webcomponents/dist/Title.js";
+import './mty-field-checkbox-group';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -17,6 +18,7 @@ export class MtyFormContainer extends LitElement {
 	}
 
 	private formFields: NodeListOf<MtyFieldInput> | null = null;
+	private FORM_FIELD_CLASS: string = 'mty-field';
 
 	static override styles: CSSResult = css`
 		:host form {
@@ -35,6 +37,10 @@ export class MtyFormContainer extends LitElement {
 		}
 
 		:host form .section-title {
+			grid-column: 1 / -1;
+		}
+
+		:host form .full-width {
 			grid-column: 1 / -1;
 		}
 	`;
@@ -74,7 +80,7 @@ export class MtyFormContainer extends LitElement {
 
 	public getAllFormFields(): NodeListOf<MtyFieldInput> {
 		if (!this.formFields || this.formFields?.length === 0) {
-			this.formFields = this.renderRoot.querySelectorAll('mty-field-input');
+			this.formFields = this.renderRoot.querySelectorAll(`.${this.FORM_FIELD_CLASS}`);
 		}
 
 		return this.formFields as NodeListOf<MtyFieldInput>;
@@ -103,10 +109,12 @@ export class MtyFormContainer extends LitElement {
 			case FieldTypeEnum.Text:
 			case FieldTypeEnum.Number:
 			case FieldTypeEnum.Email:
-			case FieldTypeEnum.Date:
-				return html`<mty-field-input .initialConfig=${field}></mty-field-input>`;
+				case FieldTypeEnum.Date:
+				return html`<mty-field-input .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-input>`;
 			case FieldTypeEnum.Title:
 				return html`<ui5-title level="H2" class="section-title">${field.labelContent}</ui5-title>`;
+			case FieldTypeEnum.Checkbox:
+				return html`<mty-field-checkbox-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-checkbox-group>`;
 			default:
 				return html`<div class="error">Type not supported: ${field.type}</div>`
 		}
