@@ -37,7 +37,8 @@ export class MtyFieldInput extends MtyFieldWrapper {
 	placeholder?: string;
 
 	private _onChange(e: Event) {
-		this.value = (e.target as HTMLInputElement).value;
+		const val: string = (e.target as HTMLInputElement).value
+		this.value = this.type === FieldTypeEnum.Number ? parseInt(val, 10) : val;
 
 		this.dispatchEvent(new CustomEvent('mty-field-change', {
 			bubbles: true,

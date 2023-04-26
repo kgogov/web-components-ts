@@ -33,6 +33,12 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 		const checkboxes = this.renderRoot.querySelectorAll('ui5-checkbox[checked]') as NodeListOf<CheckBox>;
 
 		this.value = Array.from(checkboxes).map((checkbox: CheckBox) => checkbox.id);
+
+		this.dispatchEvent(new CustomEvent('mty-field-change', {
+			bubbles: true,
+			composed: true,
+			detail: {}
+		}));
 	}
 
 	override firstUpdated() {

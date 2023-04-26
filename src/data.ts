@@ -69,6 +69,7 @@ export const fieldsData: Field[] = [
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
+		isRequired: true,
 		value: ['bg'],
 		options: [{
 			id: 'bg',
@@ -79,8 +80,16 @@ export const fieldsData: Field[] = [
 		}, {
 			id: 'fr',
 			value: 'French'
+		}, {
+			id: 'de',
+			value: 'German'
+		}, {
+			id: 'it',
+			value: 'Italian'
+		}, {
+			id: 'es',
+			value: 'Spanish'
 		}],
-		isDisabled: false
 	}, {
 		name: 'currency',
 		labelContent: 'Which currency do you prefer?',
@@ -100,10 +109,12 @@ export const fieldsData: Field[] = [
 		name: 'working_hours',
 		labelContent: 'What is your window for working hours?',
 		type: FieldTypeEnum.WorkingHours,
+		isRequired: true,
 	}, {
 		name: 'barcode',
 		labelContent: 'Scan your badge barcode.',
 		type: FieldTypeEnum.BarcodeScanner,
+		isRequired: true,
 	}, {
 		name: 'feedback',
 		labelContent: 'Feedback (optional)',
