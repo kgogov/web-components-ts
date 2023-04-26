@@ -19,6 +19,10 @@ export const FormDataSchema = z.object({
 	middleName: z.string({
 		required_error: DEFAULT_ERROR_MSG,
 	}),
+	currency: z.enum(['bgn', 'eur', 'usd'], {
+		required_error: DEFAULT_ERROR_MSG,
+	}),
+
 	languages: z.array(z.string()).min(1, {
 		message: 'Please select at least one language!',
 	}),

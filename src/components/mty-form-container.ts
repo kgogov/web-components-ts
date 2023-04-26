@@ -8,6 +8,7 @@ import './mty-field-input';
 import { ZodIssue } from 'zod';
 import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import "@ui5/webcomponents/dist/Title.js";
+import './mty-field-radio-group';
 import './mty-field-checkbox-group';
 import './mty-field-switch';
 import './mty-field-rating';
@@ -115,6 +116,8 @@ export class MtyFormContainer extends LitElement {
 				return html`<mty-field-input .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-input>`;
 			case FieldTypeEnum.Title:
 				return html`<ui5-title level="H2" class="section-title">${field.labelContent}</ui5-title>`;
+			case FieldTypeEnum.Radio:
+				return html`<mty-field-radio-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-radio-group>`;
 			case FieldTypeEnum.Checkbox:
 				return html`<mty-field-checkbox-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-checkbox-group>`;
 			case FieldTypeEnum.Switch:

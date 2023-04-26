@@ -29,6 +29,7 @@ export const fieldsData: Field[] = [
 		name: 'email',
 		labelContent: 'Email',
 		type: FieldTypeEnum.Email,
+		isRequired: true,
 		value: 'asd@abv.bg',
 		placeholder: 'Enter your email',
 	}, {
@@ -66,6 +67,26 @@ export const fieldsData: Field[] = [
 			value: 'United Kingdom'
 		}]
 	}, {
+		name: 'currency',
+		labelContent: 'Which currency do you prefer?',
+		type: FieldTypeEnum.Radio,
+		isRequired: true,
+		options: [{
+			id: 'bgn',
+			value: 'BGN'
+		}, {
+			id: 'eur',
+			value: 'EUR'
+		}, {
+			id: 'usd',
+			value: 'USD'
+		}]
+	}, {
+		name: 'working_hours',
+		labelContent: 'What is your window for working hours?',
+		type: FieldTypeEnum.WorkingHours,
+		isRequired: true,
+	}, {
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
@@ -89,27 +110,10 @@ export const fieldsData: Field[] = [
 		}, {
 			id: 'es',
 			value: 'Spanish'
+		}, {
+			id: 'zl',
+			value: 'Zulu'
 		}],
-	}, {
-		name: 'currency',
-		labelContent: 'Which currency do you prefer?',
-		type: FieldTypeEnum.Radio,
-		isRequired: true,
-		options: [{
-			id: 'bgn',
-			value: 'Bulgarian lev'
-		}, {
-			id: 'eur',
-			value: 'Euro'
-		}, {
-			id: 'usd',
-			value: 'United states dollar'
-		}]
-	}, {
-		name: 'working_hours',
-		labelContent: 'What is your window for working hours?',
-		type: FieldTypeEnum.WorkingHours,
-		isRequired: true,
 	}, {
 		name: 'barcode',
 		labelContent: 'Scan your badge barcode.',
@@ -121,7 +125,7 @@ export const fieldsData: Field[] = [
 		type: FieldTypeEnum.Title,
 	}, {
 		name: 'newsletter',
-		labelContent: 'Do you want to subscribe to our newsletter?',
+		labelContent: 'Subscribe to our newsletter?',
 		type: FieldTypeEnum.Switch,
 		value: 'on',
 		options: [{
@@ -133,7 +137,7 @@ export const fieldsData: Field[] = [
 		}]
 	}, {
 		name: 'rating',
-		labelContent: 'Would you like to rate your experience?',
+		labelContent: 'Want to rate your experience?',
 		type: FieldTypeEnum.Rating,
 		value: 8.7
 	}
