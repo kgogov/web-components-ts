@@ -5,7 +5,7 @@ import { FieldOption } from './FieldOption.Interface';
 export interface Field extends FieldWrapper {
 	type: FieldTypeEnum;
 	name: string;
-	value?: string | number | string[];
+	value?: string | number | string[] | number[];
 	placeholder?: string;
 	options?: FieldOption[];
 }

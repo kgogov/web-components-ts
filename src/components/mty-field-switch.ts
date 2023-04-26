@@ -6,7 +6,7 @@ import './mty-field-wrapper';
 import "./mty-custom-components";
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/Switch.js";
-import Switch from '@ui5/webcomponents/dist/Switch.js';
+import Switch from '@ui5/webcomponents/dist/Switch';
 
 @customElement('mty-field-switch')
 export class MtyFieldSwitch extends MtyFieldWrapper {

@@ -12,6 +12,7 @@ import './mty-field-radio-group';
 import './mty-field-checkbox-group';
 import './mty-field-switch';
 import './mty-field-rating';
+import './mty-field-working-hours';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -124,6 +125,8 @@ export class MtyFormContainer extends LitElement {
 				return html`<mty-field-switch .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-switch>`;
 			case FieldTypeEnum.Rating:
 				return html`<mty-field-rating .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-rating>`;
+			case FieldTypeEnum.WorkingHours:
+				return html`<mty-field-working-hours .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-working-hours>`;
 			default:
 				return html`<div class="error">Type not supported: ${field.type}</div>`
 		}

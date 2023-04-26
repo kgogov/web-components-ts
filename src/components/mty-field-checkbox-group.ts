@@ -6,7 +6,7 @@ import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/CheckBox.js";
-import CheckBox from '@ui5/webcomponents/dist/CheckBox.js';
+import CheckBox from '@ui5/webcomponents/dist/CheckBox';
 
 @customElement('mty-field-checkbox-group')
 export class MtyFieldCheckboxGroup extends MtyFieldWrapper {

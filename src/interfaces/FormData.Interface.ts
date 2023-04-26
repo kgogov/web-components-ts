@@ -31,7 +31,16 @@ export const FormDataSchema = z.object({
 	}),
 	rating: z.number({
 		required_error: DEFAULT_ERROR_MSG,
-	}).min(3).max(10)
+	}).min(3).max(10),
+	working_hours: z.array(z.number()).length(2).refine((val) => {
+		return val[1] - val[0] >= 4;
+	}, {
+		message: "You must provide a 4 hour window!",
+	}).refine((val) => {
+		return val[1] - val[0] <= 10;
+	}, {
+		message: "Your window can't exceed 10 hours!",
+	}),
 }).partial({
 	middleName: true,
 	newsletter: true,

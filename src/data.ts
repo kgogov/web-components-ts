@@ -82,10 +82,16 @@ export const fieldsData: Field[] = [
 			value: 'USD'
 		}]
 	}, {
+		name: 'barcode',
+		labelContent: 'Scan your badge barcode.',
+		type: FieldTypeEnum.BarcodeScanner,
+		isRequired: true,
+	}, {
 		name: 'working_hours',
 		labelContent: 'What is your window for working hours?',
 		type: FieldTypeEnum.WorkingHours,
 		isRequired: true,
+		value: [9, 18]
 	}, {
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
@@ -114,11 +120,6 @@ export const fieldsData: Field[] = [
 			id: 'zl',
 			value: 'Zulu'
 		}],
-	}, {
-		name: 'barcode',
-		labelContent: 'Scan your badge barcode.',
-		type: FieldTypeEnum.BarcodeScanner,
-		isRequired: true,
 	}, {
 		name: 'feedback',
 		labelContent: 'Feedback (optional)',

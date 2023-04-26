@@ -5,36 +5,32 @@ import './mty-field-wrapper';
 import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
 import { FieldOption } from '../interfaces/FieldOption.Interface';
-import "@ui5/webcomponents/dist/RadioButton.js";
-import RadioButton from '@ui5/webcomponents/dist/RadioButton';
+import "@ui5/webcomponents/dist/RangeSlider.js";
+import RangeSlider from '@ui5/webcomponents/dist/RangeSlider';
 
-@customElement('mty-field-radio-group')
-export class MtyFieldRadioGroup extends MtyFieldWrapper {
+@customElement('mty-field-working-hours')
+export class MtyFieldWorkingHours extends MtyFieldWrapper {
 
 	constructor() {
 		super();
 
-		this.type = FieldTypeEnum.Radio;
-		this.name = 'radio';
-		this.options = [];
+		this.type = FieldTypeEnum.WorkingHours;
+		this.name = 'working-hours';
 	}
 
 	@property({ type: String })
 	type: FieldTypeEnum;
 
-	@property({ type: String })
-	value?: string;
-
 	@property({ type: Array })
-	options: FieldOption[];
+	value?: number[];
 
 	override firstUpdated() {
 		Object.assign(this, this.initialConfig);
 	}
 
-	private onRadioChangedHandler = (e: Event) => {
-		const radio = this.renderRoot.querySelector('ui5-radio-button[checked]') as RadioButton;
-		this.value = radio.id;
+	private onRangeChangedHandler = (event: Event) => {
+		const range = event.target as RangeSlider;
+		this.value = [range.startValue, range.endValue];
 
 		this.dispatchEvent(new CustomEvent('mty-field-change', {
 			bubbles: true,
@@ -44,6 +40,10 @@ export class MtyFieldRadioGroup extends MtyFieldWrapper {
 	}
 
 	override render() {
+		let initialVals: number[] = [9, 18];
+		if (this.value && this.value.length > 1) {
+			initialVals = this.value;
+		}
 		return html`
 			<mty-field-wrapper
 				.initialConfig=${this.initialConfig}
@@ -53,19 +53,18 @@ export class MtyFieldRadioGroup extends MtyFieldWrapper {
 				?isError=${this.isError}
 				?isRequired=${this.isRequired}
 				?isDisabled=${this.isDisabled}>
-
-				<div class="radio-wrapper">
-					${this.options.map((option: FieldOption) => html`
-						<ui5-radio-button
-							id="${option.id}"
-							text="${option.value}"
-							name=${this.name}
-							@change=${this.onRadioChangedHandler}
-							?checked="${this.value === option.id}"
-							?disabled="${this.isDisabled}"
-						></ui5-radio-button>
-					`)}
-				</div>
+				<ui5-range-slider
+					min="6"
+					max="20"
+					step="1"
+					start-value="${initialVals[0]}"
+					end-value="${initialVals[1]}"
+					label-interval="2"
+					show-tooltip
+					show-tickmarks
+					?disabled="${this.isDisabled}"
+					@change="${this.onRangeChangedHandler}">
+				></ui5-range-slider>
 			</mty-field-wrapper>
 		`;
 	}
