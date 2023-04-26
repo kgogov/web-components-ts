@@ -9,6 +9,7 @@ import { ZodIssue } from 'zod';
 import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import "@ui5/webcomponents/dist/Title.js";
 import './mty-field-checkbox-group';
+import './mty-field-switch';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -115,6 +116,8 @@ export class MtyFormContainer extends LitElement {
 				return html`<ui5-title level="H2" class="section-title">${field.labelContent}</ui5-title>`;
 			case FieldTypeEnum.Checkbox:
 				return html`<mty-field-checkbox-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-checkbox-group>`;
+			case FieldTypeEnum.Switch:
+				return html`<mty-field-switch .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-switch>`;
 			default:
 				return html`<div class="error">Type not supported: ${field.type}</div>`
 		}

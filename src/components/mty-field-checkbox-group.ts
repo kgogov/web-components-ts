@@ -54,7 +54,7 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 
 				<div class="checkbox-wrapper">
 					${this.options.map((option: FieldOption) => html`
-						<ui5-checkbox id=${option.id} text=${option.value} @change=${this.onCheckChangedHandler} ?disabled=${this.isDisabled}></ui5-checkbox>
+						<ui5-checkbox id="${option.id}" text="${option.value}" @change=${this.onCheckChangedHandler} ?disabled="${this.isDisabled}"></ui5-checkbox>
 					`)}
 				</div>
 			</mty-field-wrapper>
