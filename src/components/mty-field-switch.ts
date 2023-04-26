@@ -6,6 +6,7 @@ import './mty-field-wrapper';
 import "./mty-custom-components";
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/Switch.js";
+import Switch from '@ui5/webcomponents/dist/Switch.js';
 
 @customElement('mty-field-switch')
 export class MtyFieldSwitch extends MtyFieldWrapper {
@@ -39,9 +40,10 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 		Object.assign(this, this.initialConfig);
 	}
 
-	private switchChanged () {
-		const isChecked: boolean = (this.renderRoot.querySelector('ui5-switch') as HTMLInputElement).checked;
+	private switchChanged (event: Event) {
+		const isChecked: boolean = (event.target as Switch).checked;
 		this.value = isChecked ? this.options[0].id : this.options[1].id;
+		this.onChange?.(event);
 	}
 
 	override render() {

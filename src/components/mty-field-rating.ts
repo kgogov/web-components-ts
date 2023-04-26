@@ -35,8 +35,9 @@ export class MtyFieldRating extends MtyFieldWrapper {
 		Object.assign(this, this.initialConfig);
 	}
 
-	private ratingChanged () {
-		this.value = (this.renderRoot.querySelector('ui5-rating-indicator') as RatingIndicator).value;
+	private ratingChanged (event: Event) {
+		this.value = (event.target as RatingIndicator).value;
+		this.onChange?.(event);
 	}
 
 	override render() {

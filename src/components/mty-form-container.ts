@@ -118,9 +118,9 @@ export class MtyFormContainer extends LitElement {
 			case FieldTypeEnum.Checkbox:
 				return html`<mty-field-checkbox-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-checkbox-group>`;
 			case FieldTypeEnum.Switch:
-				return html`<mty-field-switch .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-switch>`;
+				return html`<mty-field-switch .initialConfig=${field} class="${this.FORM_FIELD_CLASS}" .onChange="${() => {this.validateData()}}"></mty-field-switch>`;
 			case FieldTypeEnum.Rating:
-				return html`<mty-field-rating .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-rating>`;
+				return html`<mty-field-rating .initialConfig=${field} class="${this.FORM_FIELD_CLASS}" .onChange="${() => {this.validateData()}}"></mty-field-rating>`;
 			default:
 				return html`<div class="error">Type not supported: ${field.type}</div>`
 		}

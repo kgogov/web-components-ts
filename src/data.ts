@@ -112,6 +112,7 @@ export const fieldsData: Field[] = [
 		name: 'newsletter',
 		labelContent: 'Do you want to subscribe to our newsletter?',
 		type: FieldTypeEnum.Switch,
+		value: 'on',
 		options: [{
 			id: 'on',
 			value: 'Yes'
