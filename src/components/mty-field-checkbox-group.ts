@@ -6,6 +6,7 @@ import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/CheckBox.js";
+import CheckBox from '@ui5/webcomponents/dist/CheckBox.js';
 
 @customElement('mty-field-checkbox-group')
 export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
@@ -32,9 +33,9 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 	onChange?: (e: Event) => void;
 
 	private onCheckChangedHandler = (e: Event) => {
-		const checkboxes = this.renderRoot.querySelectorAll('ui5-checkbox[checked]') as NodeListOf<HTMLInputElement>;
+		const checkboxes = this.renderRoot.querySelectorAll('ui5-checkbox[checked]') as NodeListOf<CheckBox>;
 
-		this.value = Array.from(checkboxes).map((checkbox: HTMLInputElement) => checkbox.id);
+		this.value = Array.from(checkboxes).map((checkbox: CheckBox) => checkbox.id);
 	}
 
 	override firstUpdated() {
@@ -54,7 +55,13 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 
 				<div class="checkbox-wrapper">
 					${this.options.map((option: FieldOption) => html`
-						<ui5-checkbox id="${option.id}" text="${option.value}" @change=${this.onCheckChangedHandler} ?disabled="${this.isDisabled}"></ui5-checkbox>
+						<ui5-checkbox
+							id="${option.id}"
+							text="${option.value}"
+							@change=${this.onCheckChangedHandler}
+							?checked="${this.value?.includes(option.id)}"
+							?disabled="${this.isDisabled}"
+						></ui5-checkbox>
 					`)}
 				</div>
 			</mty-field-wrapper>

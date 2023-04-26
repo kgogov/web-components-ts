@@ -31,7 +31,7 @@ export class MtyFieldInput extends MtyFieldWrapper {
 	type: FieldTypeEnum;
 
 	@property({ type: String })
-	value?: string;
+	value?: string | number;
 
 	@property({ type: String })
 	placeholder?: string;

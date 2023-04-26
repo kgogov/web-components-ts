@@ -5,7 +5,7 @@ import { FieldOption } from './FieldOption.Interface';
 export interface Field extends FieldWrapper {
 	type: FieldTypeEnum;
 	name: string;
-	value?: string;
+	value?: string | number | string[];
 	placeholder?: string;
 	options?: FieldOption[];
 	onChange?: (e: Event) => void;

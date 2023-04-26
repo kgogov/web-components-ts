@@ -33,7 +33,7 @@ export const fieldsData: Field[] = [
 		placeholder: 'Enter your email',
 	}, {
 		name: 'age',
-		value: '25',
+		value: 25,
 		labelContent: 'Age',
 		isRequired: true,
 		type: FieldTypeEnum.Number,
@@ -69,6 +69,7 @@ export const fieldsData: Field[] = [
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
+		value: ['bg'],
 		options: [{
 			id: 'bg',
 			value: 'Bulgarian'
@@ -111,7 +112,6 @@ export const fieldsData: Field[] = [
 		name: 'newsletter',
 		labelContent: 'Do you want to subscribe to our newsletter?',
 		type: FieldTypeEnum.Switch,
-		value: 'off',
 		options: [{
 			id: 'on',
 			value: 'Yes'
@@ -123,5 +123,6 @@ export const fieldsData: Field[] = [
 		name: 'rating',
 		labelContent: 'Would you like to rate your experience?',
 		type: FieldTypeEnum.Rating,
+		value: 8.7
 	}
 ];

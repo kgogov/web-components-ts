@@ -55,6 +55,7 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 				?isDisabled=${this.isDisabled}>
 					${(this.options.length > 1) ?
 						html`<ui5-switch
+								?checked="${this.value === this.options[0].id}"
 								?disabled="${this.isDisabled}"
 								text-on="${this.options[0].value}"
 								text-off="${this.options[1].value}"
