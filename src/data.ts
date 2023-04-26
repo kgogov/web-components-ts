@@ -33,19 +33,18 @@ export const fieldsData: Field[] = [
 		value: 'asd@abv.bg',
 		placeholder: 'Enter your email',
 	}, {
-		name: 'age',
-		value: 25,
-		labelContent: 'Age',
-		isRequired: true,
-		type: FieldTypeEnum.Number,
-		placeholder: 'How old are you?',
-	}, {
 		name: 'date',
 		labelContent: 'Birthdate',
 		isRequired: true,
-		isDisabled: true,
 		type: FieldTypeEnum.Date,
-		value: '2023-04-05',
+	}, {
+		name: 'age',
+		labelContent: 'Age',
+		isRequired: true,
+		isDisabled: true,
+		type: FieldTypeEnum.Number,
+		placeholder: 'How old are you?',
+		helperText: 'Note: Enter your birthdate to fill this field.'
 	}, {
 		name: 'additionalInfoTitle',
 		labelContent: 'Additional information',
@@ -87,12 +86,6 @@ export const fieldsData: Field[] = [
 		type: FieldTypeEnum.BarcodeScanner,
 		isRequired: true,
 	}, {
-		name: 'working_hours',
-		labelContent: 'What is your window for working hours?',
-		type: FieldTypeEnum.WorkingHours,
-		isRequired: true,
-		value: [9, 18]
-	}, {
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
@@ -120,6 +113,12 @@ export const fieldsData: Field[] = [
 			id: 'zl',
 			value: 'Zulu'
 		}],
+	}, {
+		name: 'working_hours',
+		labelContent: 'What is your window for working hours?',
+		type: FieldTypeEnum.WorkingHours,
+		isRequired: true,
+		value: [9, 18]
 	}, {
 		name: 'feedback',
 		labelContent: 'Feedback (optional)',

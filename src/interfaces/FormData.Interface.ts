@@ -8,7 +8,9 @@ export const FormDataSchema = z.object({
 	}).email({
 		message: 'Please enter a valid email address!',
 	}),
-	age: z.number().min(18).max(80),
+	age: z.number({
+		required_error: DEFAULT_ERROR_MSG,
+	}).min(18).max(80),
 	date: z.preprocess((val) => new Date(val as string), z.date()),
 	firstName: z.string({
 		required_error: DEFAULT_ERROR_MSG,
