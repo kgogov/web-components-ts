@@ -29,9 +29,6 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 	@property({ type: Array })
 	options: FieldOption[];
 
-	@property({ type: Function })
-	onChange?: (e: Event) => void;
-
 	private onCheckChangedHandler = (e: Event) => {
 		const checkboxes = this.renderRoot.querySelectorAll('ui5-checkbox[checked]') as NodeListOf<CheckBox>;
 

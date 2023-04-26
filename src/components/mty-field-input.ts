@@ -36,9 +36,6 @@ export class MtyFieldInput extends MtyFieldWrapper {
 	@property({ type: String })
 	placeholder?: string;
 
-	@property({ type: Function })
-	onChange?: (e: Event) => void;
-
 	private _onChange(e: Event) {
 		this.value = (e.target as HTMLInputElement).value;
 

@@ -28,16 +28,18 @@ export class MtyFieldRating extends MtyFieldWrapper {
 	@property({ type: String })
 	placeholder?: string;
 
-	@property({ type: Function })
-	onChange?: (e: Event) => void;
-
 	override firstUpdated() {
 		Object.assign(this, this.initialConfig);
 	}
 
 	private ratingChanged (event: Event) {
 		this.value = (event.target as RatingIndicator).value;
-		this.onChange?.(event);
+		
+		this.dispatchEvent(new CustomEvent('mty-field-change', {
+			bubbles: true,
+			composed: true,
+			detail: {}
+		}));
 	}
 
 	override render() {

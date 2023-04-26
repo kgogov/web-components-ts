@@ -8,5 +8,4 @@ export interface Field extends FieldWrapper {
 	value?: string | number | string[];
 	placeholder?: string;
 	options?: FieldOption[];
-	onChange?: (e: Event) => void;
 }

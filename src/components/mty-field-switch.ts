@@ -33,9 +33,6 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 	@property({ type: Array })
 	options: FieldOption[];
 
-	@property({ type: Function })
-	onChange?: (e: Event) => void;
-
 	override firstUpdated() {
 		Object.assign(this, this.initialConfig);
 	}
@@ -43,7 +40,12 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 	private switchChanged (event: Event) {
 		const isChecked: boolean = (event.target as Switch).checked;
 		this.value = isChecked ? this.options[0].id : this.options[1].id;
-		this.onChange?.(event);
+
+		this.dispatchEvent(new CustomEvent('mty-field-change', {
+			bubbles: true,
+			composed: true,
+			detail: {}
+		}));
 	}
 
 	override render() {
