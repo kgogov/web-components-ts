@@ -13,6 +13,7 @@ import './mty-field-checkbox-group';
 import './mty-field-switch';
 import './mty-field-rating';
 import './mty-field-working-hours';
+import './mty-field-select';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -123,6 +124,8 @@ export class MtyFormContainer extends LitElement {
 				return html`<mty-field-checkbox-group .initialConfig=${field} class="${this.FORM_FIELD_CLASS} full-width"></mty-field-checkbox-group>`;
 			case FieldTypeEnum.Switch:
 				return html`<mty-field-switch .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-switch>`;
+			case FieldTypeEnum.Select:
+				return html`<mty-field-select .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-select>`;
 			case FieldTypeEnum.Rating:
 				return html`<mty-field-rating .initialConfig=${field} class="${this.FORM_FIELD_CLASS}"></mty-field-rating>`;
 			case FieldTypeEnum.WorkingHours:

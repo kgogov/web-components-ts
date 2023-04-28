@@ -55,6 +55,7 @@ export const fieldsData: Field[] = [
 		type: FieldTypeEnum.Select,
 		isRequired: true,
 		placeholder: 'Where are you from?',
+		value: 'UK',
 		options: [{
 			id: 'BG',
 			value: 'Bulgaria'
