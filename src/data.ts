@@ -82,16 +82,41 @@ export const fieldsData: Field[] = [
 			value: 'USD'
 		}]
 	}, {
-		name: 'barcode',
-		labelContent: 'Scan your badge barcode.',
-		type: FieldTypeEnum.BarcodeScanner,
-		isRequired: true,
-	}, {
 		name: 'languages',
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
 		isRequired: true,
 		value: ['bg'],
+		options: [{
+			id: 'bg',
+			value: 'Bulgarian'
+		}, {
+			id: 'en',
+			value: 'English'
+		}, {
+			id: 'fr',
+			value: 'French'
+		}, {
+			id: 'de',
+			value: 'German'
+		}, {
+			id: 'it',
+			value: 'Italian'
+		}, {
+			id: 'es',
+			value: 'Spanish'
+		}, {
+			id: 'zl',
+			value: 'Zulu'
+		}],
+	}, {
+		name: 'places',
+		labelContent: 'Which of the following places have you visited?',
+		type: FieldTypeEnum.MultiComboBox,
+		helperText: 'Note: You can select multiple places.',
+		isRequired: true,
+		placeholder: 'Select places',
+		value: ['en', 'fr'],
 		options: [{
 			id: 'bg',
 			value: 'Bulgarian'
