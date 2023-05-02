@@ -6,6 +6,7 @@ import './mty-field-wrapper';
 import "./mty-custom-components";
 import "@ui5/webcomponents/dist/RatingIndicator.js";
 import RatingIndicator from '@ui5/webcomponents/dist/RatingIndicator';
+import { ValidationType } from '../interfaces/Field.Interface';
 
 @customElement('mty-field-rating')
 export class MtyFieldRating extends MtyFieldWrapper {
@@ -27,6 +28,9 @@ export class MtyFieldRating extends MtyFieldWrapper {
 
 	@property({ type: String })
 	placeholder?: string;
+	
+	@property({ type: Object })
+	validation?: ValidationType;
 
 	override firstUpdated() {
 		Object.assign(this, this.initialConfig);
@@ -45,15 +49,15 @@ export class MtyFieldRating extends MtyFieldWrapper {
 	override render() {
 		return html`
 			<mty-field-wrapper
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 					<ui5-rating-indicator
 						value="${this.value}"
-						max="10"
+						max="${this.validation?.max}"
 						?disabled="${this.isDisabled}"
 						@change="${this.ratingChanged}"
 					></ui5-rating-indicator>

@@ -7,6 +7,7 @@ import { MtyFieldWrapper } from './mty-field-wrapper';
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/RangeSlider.js";
 import RangeSlider from '@ui5/webcomponents/dist/RangeSlider';
+import { ValidationType } from '../interfaces/Field.Interface';
 
 @customElement('mty-field-working-hours')
 export class MtyFieldWorkingHours extends MtyFieldWrapper {
@@ -23,6 +24,9 @@ export class MtyFieldWorkingHours extends MtyFieldWrapper {
 
 	@property({ type: Array })
 	value?: number[];
+	
+	@property({ type: Object })
+	validation?: ValidationType;
 
 	override firstUpdated() {
 		Object.assign(this, this.initialConfig);
@@ -46,16 +50,15 @@ export class MtyFieldWorkingHours extends MtyFieldWrapper {
 		}
 		return html`
 			<mty-field-wrapper
-				.initialConfig=${this.initialConfig}
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 				<ui5-range-slider
-					min="6"
-					max="20"
+					min="${this.validation?.min || 6}"
+					max="${this.validation?.max || 20}"
 					step="1"
 					start-value="${initialVals[0]}"
 					end-value="${initialVals[1]}"

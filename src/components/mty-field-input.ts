@@ -4,6 +4,7 @@ import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
+import { ValidationType } from '../interfaces/Field.Interface';
 
 @customElement('mty-field-input')
 export class MtyFieldInput extends MtyFieldWrapper {
@@ -36,6 +37,9 @@ export class MtyFieldInput extends MtyFieldWrapper {
 	@property({ type: String })
 	placeholder?: string;
 
+	@property({ type: Object })
+	validation?: ValidationType;
+
 	private _onChange(e: Event) {
 		const val: string = (e.target as HTMLInputElement).value
 		this.value = this.type === FieldTypeEnum.Number ? parseInt(val, 10) : val;
@@ -54,19 +58,20 @@ export class MtyFieldInput extends MtyFieldWrapper {
 	override render() {
 		return html`
 			<mty-field-wrapper
-				.initialConfig=${this.initialConfig}
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 
 				<input @change="${this._onChange}"
 					   name="${this.name}"
 					   type="${this.type}"
 					   value="${this.value ?? ''}"
 					   placeholder="${this.placeholder ?? ''}"
+					   min="${this.validation?.min ?? ''}"
+					   max="${this.validation?.max ?? ''}"
 					   ?disabled=${this.isDisabled} />
 			</mty-field-wrapper>
 		`;

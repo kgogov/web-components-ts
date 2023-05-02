@@ -51,12 +51,12 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 	override render() {
 		return html`
 			<mty-field-wrapper
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 					${(this.options.length > 1) ?
 						html`<ui5-switch
 								?checked="${this.value === this.options[0].id}"

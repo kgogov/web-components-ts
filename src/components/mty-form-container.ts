@@ -13,6 +13,7 @@ import './mty-field-checkbox-group';
 import './mty-field-switch';
 import './mty-field-rating';
 import './mty-field-working-hours';
+import { CustomEventDetail } from '../interfaces/CustomEventDetail.Interface';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {

@@ -1,3 +1,5 @@
+import { MtyFieldInput } from "./components/mty-field-input";
+import { CustomEventDetail } from "./interfaces/CustomEventDetail.Interface";
 import { Field } from "./interfaces/Field.Interface";
 import { FieldTypeEnum } from "./interfaces/FieldType.Enum";
 
@@ -37,6 +39,9 @@ export const fieldsData: Field[] = [
 		labelContent: 'Birthdate',
 		isRequired: true,
 		type: FieldTypeEnum.Date,
+		validation: {
+			max: new Date().toISOString().split('T')[0],
+		}
 	}, {
 		name: 'age',
 		labelContent: 'Age',
@@ -44,7 +49,11 @@ export const fieldsData: Field[] = [
 		isDisabled: true,
 		type: FieldTypeEnum.Number,
 		placeholder: 'How old are you?',
-		helperText: 'Note: Enter your birthdate to fill this field.'
+		helperText: 'Note: Enter your birthdate to fill this field.',
+		validation: {
+			min: 18,
+			max: 80,
+		},
 	}, {
 		name: 'additionalInfoTitle',
 		labelContent: 'Additional information',
@@ -118,7 +127,11 @@ export const fieldsData: Field[] = [
 		labelContent: 'What is your window for working hours?',
 		type: FieldTypeEnum.WorkingHours,
 		isRequired: true,
-		value: [9, 18]
+		value: [9, 18],
+		validation: {
+			min: 6,
+			max: 20,
+		},
 	}, {
 		name: 'feedback',
 		labelContent: 'Feedback (optional)',
@@ -139,6 +152,9 @@ export const fieldsData: Field[] = [
 		name: 'rating',
 		labelContent: 'Want to rate your experience?',
 		type: FieldTypeEnum.Rating,
-		value: 8.7
+		value: 8.7,
+		validation: {
+			max: 10,
+		}
 	}
 ];
