@@ -7,7 +7,7 @@ import { MtyFieldWrapper } from './mty-field-wrapper';
 import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/RangeSlider.js";
 import RangeSlider from '@ui5/webcomponents/dist/RangeSlider';
-import { ValidationType } from '../interfaces/Field.Interface';
+import { ValidationType } from '../interfaces/ValidationType.Interface';
 
 @customElement('mty-field-working-hours')
 export class MtyFieldWorkingHours extends MtyFieldWrapper {

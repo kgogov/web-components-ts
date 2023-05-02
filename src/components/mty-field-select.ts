@@ -57,13 +57,12 @@ export class MtyFieldSelect extends MtyFieldWrapper {
 	override render() {
 		return html`
 			<mty-field-wrapper
-				.initialConfig=${this.initialConfig}
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 
 				<ui5-select ?disabled="${this.isDisabled}" @change=${this.onSelectChangedHandler}>
 					${this.options.map((option: FieldOption) => html`

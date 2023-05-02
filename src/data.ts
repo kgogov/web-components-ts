@@ -1,5 +1,4 @@
 import { MtyFieldInput } from "./components/mty-field-input";
-import { CustomEventDetail } from "./interfaces/CustomEventDetail.Interface";
 import { Field } from "./interfaces/Field.Interface";
 import { FieldTypeEnum } from "./interfaces/FieldType.Enum";
 

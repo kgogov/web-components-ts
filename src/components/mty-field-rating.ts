@@ -6,7 +6,7 @@ import './mty-field-wrapper';
 import "./mty-custom-components";
 import "@ui5/webcomponents/dist/RatingIndicator.js";
 import RatingIndicator from '@ui5/webcomponents/dist/RatingIndicator';
-import { ValidationType } from '../interfaces/Field.Interface';
+import { ValidationType } from '../interfaces/ValidationType.Interface';
 
 @customElement('mty-field-rating')
 export class MtyFieldRating extends MtyFieldWrapper {

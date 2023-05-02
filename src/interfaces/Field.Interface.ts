@@ -1,6 +1,7 @@
 import { FieldTypeEnum } from './FieldType.Enum';
 import { FieldWrapper } from './FieldWrapper.Interface';
 import { FieldOption } from './FieldOption.Interface';
+import { ValidationType } from './ValidationType.Interface';
 
 export interface Field extends FieldWrapper {
 	type: FieldTypeEnum;
@@ -8,4 +9,5 @@ export interface Field extends FieldWrapper {
 	value?: string | number | string[] | number[];
 	placeholder?: string;
 	options?: FieldOption[];
+	validation?: ValidationType;
 }

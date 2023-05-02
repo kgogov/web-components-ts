@@ -54,13 +54,12 @@ export class MtyFieldMultiCombobox extends MtyFieldWrapper {
 	override render() {
 		return html`
 			<mty-field-wrapper
-				.initialConfig=${this.initialConfig}
-				name=${this.name}
-				labelContent=${this.labelContent}
-				helperText=${this.helperText}
-				?isError=${this.isError}
-				?isRequired=${this.isRequired}
-				?isDisabled=${this.isDisabled}>
+				name="${this.name}"
+				labelContent="${this.labelContent}"
+				helperText="${this.helperText}"
+				?isError="${this.isError}"
+				?isRequired="${this.isRequired}"
+				?isDisabled="${this.isDisabled}">
 
 				<ui5-multi-combobox ?disabled="${this.isDisabled}" @selection-change=${this.onMultiComboboxChangedHandler} placeholder="${this.placeholder}">
 					${this.options.map((option: FieldOption) => html`

@@ -4,7 +4,7 @@ import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
-import { ValidationType } from '../interfaces/Field.Interface';
+import { ValidationType } from '../interfaces/ValidationType.Interface';
 
 @customElement('mty-field-input')
 export class MtyFieldInput extends MtyFieldWrapper {
