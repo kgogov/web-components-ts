@@ -6,6 +6,8 @@ import { MtyFieldCheckboxGroup } from './mty-field-checkbox-group';
 import { MtyFieldSwitch } from './mty-field-switch';
 import { MtyFieldRating } from './mty-field-rating';
 import { MtyFieldWorkingHours } from './mty-field-working-hours';
+import { MtyFieldSelect } from './mty-field-select';
+import { MtyFieldMultiCombobox } from './mty-field-multi-combobox';
 
 declare global {
 	interface HTMLElementTagNameMap {
@@ -15,7 +17,9 @@ declare global {
 		'mty-field-radio-group': MtyFieldRadioGroup;
 		'mty-field-checkbox-group': MtyFieldCheckboxGroup;
 		'mty-field-switch': MtyFieldSwitch;
+		'mty-field-select': MtyFieldSelect;
 		'mty-field-rating': MtyFieldRating;
 		'mty-field-working-hours': MtyFieldWorkingHours;
+		'mty-field-multi-combobox': MtyFieldMultiCombobox;
 	}
 }

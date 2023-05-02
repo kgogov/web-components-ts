@@ -11,5 +11,5 @@ export enum FieldTypeEnum {
 	Radio = 'radio',
 	Checkbox = 'checkbox',
 	Rating = 'rating',
-	BarcodeScanner = 'barcodeScanner',
+	MultiComboBox = 'MultiComboBox',
 }

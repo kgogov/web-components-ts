@@ -43,6 +43,14 @@ export const FormDataSchema = z.object({
 	}, {
 		message: "Your window can't exceed 10 hours!",
 	}),
+	county:	z.string({
+		required_error: DEFAULT_ERROR_MSG,
+	}),
+	places: z.array(z.string()).min(2, {
+		message: 'Please select at least two places!',
+	}).max(5, {
+		message: 'Please select no more than five places!',
+	}),
 }).partial({
 	middleName: true,
 	newsletter: true,
