@@ -24,7 +24,6 @@ export const FormDataSchema = z.object({
 	currency: z.enum(['bgn', 'eur', 'usd'], {
 		required_error: DEFAULT_ERROR_MSG,
 	}),
-
 	languages: z.array(z.string()).min(1, {
 		message: 'Please select at least one language!',
 	}),
@@ -51,6 +50,9 @@ export const FormDataSchema = z.object({
 	}).max(5, {
 		message: 'Please select no more than five places!',
 	}),
+	otherLanguages: z.enum(['yes', 'no'], {
+		required_error: DEFAULT_ERROR_MSG
+	})
 }).partial({
 	middleName: true,
 	newsletter: true,

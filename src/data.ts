@@ -13,7 +13,7 @@ export const fieldsData: Field[] = [
 		labelContent: 'First name',
 		type: FieldTypeEnum.Text,
 		placeholder: 'Enter your first name',
-		isRequired : true
+		isRequired: true
 	}, {
 		name: 'middleName',
 		labelContent: 'Middle name',
@@ -26,7 +26,7 @@ export const fieldsData: Field[] = [
 		type: FieldTypeEnum.Text,
 		value: 'Ivanovich',
 		placeholder: 'Enter your last name',
-	},{
+	}, {
 		name: 'email',
 		labelContent: 'Email',
 		type: FieldTypeEnum.Email,
@@ -88,6 +88,19 @@ export const fieldsData: Field[] = [
 		}, {
 			id: 'usd',
 			value: 'USD'
+		}]
+	}, {
+		name: 'otherLanguages',
+		labelContent: 'Do you speak any other languages?',
+		type: FieldTypeEnum.Radio,
+		isRequired: true,
+		value: 'no',
+		options: [{
+			id: 'yes',
+			value: 'yes'
+		}, {
+			id: 'no',
+			value: 'no'
 		}]
 	}, {
 		name: 'languages',
