@@ -1,4 +1,5 @@
-import { MtyFieldInput } from "./components/mty-field-input";
+import { MtyFieldType } from "./components/mty-custom-components";
+import { CustomEventDetail } from "./interfaces/CustomEventDetail.Interface";
 import { Field } from "./interfaces/Field.Interface";
 import { FieldTypeEnum } from "./interfaces/FieldType.Enum";
 
@@ -107,7 +108,14 @@ export const fieldsData: Field[] = [
 		labelContent: 'Which of the following languages do you speak?',
 		type: FieldTypeEnum.Checkbox,
 		isRequired: true,
+		isHidden: true,
 		value: ['bg'],
+		dependantField: {
+			name: 'otherLanguages',
+			action: (formField: MtyFieldType, event: CustomEvent<CustomEventDetail>) => {
+				formField.isHidden = event.detail.changedFieldValue === 'no';
+			}
+		},
 		options: [{
 			id: 'bg',
 			value: 'Bulgarian'

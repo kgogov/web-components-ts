@@ -28,7 +28,7 @@ export class MtyFieldRating extends MtyFieldWrapper {
 
 	@property({ type: String })
 	placeholder?: string;
-	
+
 	@property({ type: Object })
 	validation?: ValidationType;
 
@@ -38,15 +38,13 @@ export class MtyFieldRating extends MtyFieldWrapper {
 
 	private ratingChanged (event: Event) {
 		this.value = (event.target as RatingIndicator).value;
-		
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"

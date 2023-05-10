@@ -36,14 +36,12 @@ export class MtyFieldRadioGroup extends MtyFieldWrapper {
 		const radio = this.renderRoot.querySelector('ui5-radio-button[checked]') as RadioButton;
 		this.value = radio.id;
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"

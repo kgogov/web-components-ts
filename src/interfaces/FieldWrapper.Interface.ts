@@ -5,4 +5,5 @@ export interface FieldWrapper {
 	isError?: boolean;
 	isRequired?: boolean;
 	isDisabled?: boolean;
+	isHidden?: boolean;
 }

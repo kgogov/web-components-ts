@@ -15,6 +15,7 @@ import './mty-field-rating';
 import './mty-field-working-hours';
 import './mty-field-select';
 import './mty-field-multi-combobox';
+import { CustomEventDetail } from '../interfaces/CustomEventDetail.Interface';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
@@ -106,7 +107,15 @@ export class MtyFormContainer extends LitElement {
 		this.removeEventListener('mty-field-change', this._handleFieldChange);
 	}
 
-	private _handleFieldChange() {
+	private _handleFieldChange(event: Event) {
+		const detail = (event as CustomEvent<CustomEventDetail>).detail;
+
+		fieldsData.forEach(field => {
+			if (field.dependantField?.name === detail.changedFieldName && field.dependantField?.action) {
+				field.dependantField.action(this.getFormFieldByName(field.name)!, event as CustomEvent)
+			}
+		});
+
 		this.validateData();
 	}
 

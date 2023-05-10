@@ -24,7 +24,7 @@ export class MtyFieldWorkingHours extends MtyFieldWrapper {
 
 	@property({ type: Array })
 	value?: number[];
-	
+
 	@property({ type: Object })
 	validation?: ValidationType;
 
@@ -36,14 +36,12 @@ export class MtyFieldWorkingHours extends MtyFieldWrapper {
 		const range = event.target as RangeSlider;
 		this.value = [range.startValue, range.endValue];
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		let initialVals: number[] = [9, 18];
 		if (this.value && this.value.length > 1) {
 			initialVals = this.value;

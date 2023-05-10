@@ -43,11 +43,7 @@ export class MtyFieldSelect extends MtyFieldWrapper {
 
 		this.value = option.id;
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override firstUpdated() {
@@ -55,6 +51,8 @@ export class MtyFieldSelect extends MtyFieldWrapper {
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"

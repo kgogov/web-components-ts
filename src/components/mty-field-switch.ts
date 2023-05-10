@@ -41,14 +41,12 @@ export class MtyFieldSwitch extends MtyFieldWrapper {
 		const isChecked: boolean = (event.target as Switch).checked;
 		this.value = isChecked ? this.options[0].id : this.options[1].id;
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"

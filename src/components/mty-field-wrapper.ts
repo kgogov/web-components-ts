@@ -1,6 +1,7 @@
 import { LitElement, html, css, CSSResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { FieldWrapper } from '../interfaces/FieldWrapper.Interface';
+import { MtyFieldType } from './mty-custom-components';
 
 @customElement('mty-field-wrapper')
 export class MtyFieldWrapper extends LitElement {
@@ -47,6 +48,9 @@ export class MtyFieldWrapper extends LitElement {
 	@property({ type: Boolean })
 	isDisabled?: boolean;
 
+	@property({ type: Boolean })
+	isHidden?: boolean;
+
 	private getFieldClasses(): string {
 		const classes: string[] = ['field-container'];
 		if (this.isError) classes.push('error');
@@ -56,6 +60,17 @@ export class MtyFieldWrapper extends LitElement {
 
 	private addRequiredStar(): string {
 		return this.isRequired ? '*' : '';
+	}
+
+	public attachCustomChangeEvent(this: MtyFieldType) {
+		this.dispatchEvent(new CustomEvent('mty-field-change', {
+			bubbles: true,
+			composed: true,
+			detail: {
+				changedFieldName: this.name,
+				changedFieldValue: this.value
+			}
+		}));
 	}
 
 	override firstUpdated() {

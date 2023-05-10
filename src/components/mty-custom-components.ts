@@ -23,3 +23,5 @@ declare global {
 		'mty-field-multi-combobox': MtyFieldMultiCombobox;
 	}
 }
+
+export type MtyFieldType = MtyFieldInput | MtyFieldRadioGroup | MtyFieldCheckboxGroup | MtyFieldSwitch | MtyFieldSelect | MtyFieldMultiCombobox | MtyFieldRating | MtyFieldWorkingHours;

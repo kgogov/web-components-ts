@@ -31,14 +31,9 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 
 	private onCheckChangedHandler = (e: Event) => {
 		const checkboxes = this.renderRoot.querySelectorAll('ui5-checkbox[checked]') as NodeListOf<CheckBox>;
-
 		this.value = Array.from(checkboxes).map((checkbox: CheckBox) => checkbox.id);
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override firstUpdated() {
@@ -46,6 +41,8 @@ export class MtyFieldCheckboxGroup extends MtyFieldWrapper {
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"

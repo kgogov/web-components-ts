@@ -40,11 +40,7 @@ export class MtyFieldMultiCombobox extends MtyFieldWrapper {
 
 		this.value = selectedItems.map((item: MultiComboBoxItem) => item.id);
 
-		this.dispatchEvent(new CustomEvent('mty-field-change', {
-			bubbles: true,
-			composed: true,
-			detail: {}
-		}));
+		this.attachCustomChangeEvent.call(this);
 	}
 
 	override firstUpdated() {
@@ -52,6 +48,8 @@ export class MtyFieldMultiCombobox extends MtyFieldWrapper {
 	}
 
 	override render() {
+		this.style.display = this.isHidden ? 'none' : '';
+
 		return html`
 			<mty-field-wrapper
 				name="${this.name}"
