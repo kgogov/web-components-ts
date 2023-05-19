@@ -1,5 +1,5 @@
 import { LitElement, html, css, CSSResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { fieldsData } from '../data';
 import { Field } from '../interfaces/Field.Interface';
 import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';

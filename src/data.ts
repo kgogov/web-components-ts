@@ -54,6 +54,14 @@ export const fieldsData: Field[] = [
 			min: 18,
 			max: 80,
 		},
+		dependantField: {
+			name: 'date',
+			action: (formField: MtyFieldType, event: CustomEvent<CustomEventDetail>) => {
+				const date = new Date(event.detail.changedFieldValue.toString());
+				const age = new Date().getFullYear() - date.getFullYear();
+				formField.value = age;
+			}
+		}
 	}, {
 		name: 'additionalInfoTitle',
 		labelContent: 'Additional information',

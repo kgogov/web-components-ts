@@ -4,7 +4,6 @@ import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import './mty-field-wrapper';
 import "./mty-custom-components";
 import { MtyFieldWrapper } from './mty-field-wrapper';
-import { FieldOption } from '../interfaces/FieldOption.Interface';
 import "@ui5/webcomponents/dist/RangeSlider.js";
 import RangeSlider from '@ui5/webcomponents/dist/RangeSlider';
 import { ValidationType } from '../interfaces/ValidationType.Interface';

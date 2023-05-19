@@ -1,4 +1,4 @@
-import { LitElement, html, css, nothing } from 'lit';
+import { html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { FieldTypeEnum } from '../interfaces/FieldType.Enum';
 import { MtyFieldWrapper } from './mty-field-wrapper';
