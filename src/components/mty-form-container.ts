@@ -1,6 +1,5 @@
 import { LitElement, html, css, CSSResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { fieldsData } from '../data';
 import { Field } from '../interfaces/Field.Interface';
 import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';
 import { MtyFieldInput } from './mty-field-input';
@@ -16,15 +15,26 @@ import './mty-field-working-hours';
 import './mty-field-select';
 import './mty-field-multi-combobox';
 import { CustomEventDetail } from '../interfaces/CustomEventDetail.Interface';
+import { DatabaseConnection } from '../database-connection';
 
 @customElement('mty-form-container')
 export class MtyFormContainer extends LitElement {
 
 	constructor() {
 		super();
+
+		let nameParam = new URLSearchParams(document.location.search).get("form");
+		if (nameParam) {
+			this.DatabaseConnection.getFormByName(nameParam).then((data: Field[]) => {
+				this.formFieldsData = data;
+				this.requestUpdate();
+			});
+		}
 	}
 
+	private DatabaseConnection: DatabaseConnection = new DatabaseConnection();
 	private formFields: NodeListOf<MtyFieldInput> | null = null;
+	private formFieldsData: Field[] = [];
 	private FORM_FIELD_CLASS: string = 'mty-field';
 
 	static override styles: CSSResult = css`
@@ -110,7 +120,7 @@ export class MtyFormContainer extends LitElement {
 	private _handleFieldChange(event: Event) {
 		const detail = (event as CustomEvent<CustomEventDetail>).detail;
 
-		fieldsData.forEach(field => {
+		this.formFieldsData.forEach(field => {
 			if (field.dependantField?.name === detail.changedFieldName && field.dependantField?.action) {
 				field.dependantField.action(this.getFormFieldByName(field.name)!, event as CustomEvent)
 			}
@@ -148,12 +158,16 @@ export class MtyFormContainer extends LitElement {
 	}
 
 	override render() {
-		return html`
-			<form>
-				${fieldsData.map((field: Field) => {
-					return this.renderField(field);
-				})}
-			</form>
-		`;
+		if (!this.formFieldsData.length) {
+			return html`<div>Loading...</div>`;
+		} else {
+			return html`
+				<form>
+					${this.formFieldsData.map((field: Field) => {
+						return this.renderField(field);
+					})}
+				</form>
+			`;
+		}
 	}
 }
