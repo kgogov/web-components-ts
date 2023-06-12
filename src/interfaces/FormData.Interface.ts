@@ -60,3 +60,7 @@ export const FormDataSchema = z.object({
 });
 
 export type FormData = z.infer<typeof FormDataSchema>;
+
+export interface User extends FormData {
+	id: string;
+}

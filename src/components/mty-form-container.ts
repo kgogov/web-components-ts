@@ -23,10 +23,24 @@ export class MtyFormContainer extends LitElement {
 	constructor() {
 		super();
 
-		let nameParam = new URLSearchParams(document.location.search).get("form");
-		if (nameParam) {
-			this.DatabaseConnection.getFormByName(nameParam).then((data: Field[]) => {
-				this.formFieldsData = data;
+		const formName = this.URLSearchParams.get("form");
+		const userId = this.URLSearchParams.get("id");
+
+		if (formName) {
+			const formStructure = this.DatabaseConnection.getFormByName(formName);
+			let user = null;
+
+			if (userId) {
+				user = this.DatabaseConnection.getUserById(userId);
+			}
+
+			Promise.all([formStructure, user]).then(([formStructure, user]) => {
+				this.formFieldsData = formStructure;
+
+				if (user) {
+					this.setFormFieldsData(user);
+				}
+
 				this.requestUpdate();
 			});
 		}
@@ -36,6 +50,19 @@ export class MtyFormContainer extends LitElement {
 	private formFields: NodeListOf<MtyFieldInput> | null = null;
 	private formFieldsData: Field[] = [];
 	private FORM_FIELD_CLASS: string = 'mty-field';
+	private URLSearchParams: URLSearchParams = new URLSearchParams(document.location.search);
+
+	private setFormFieldsData(data: FormData) {
+		let fieldName: keyof FormData;
+
+		this.formFieldsData.forEach((field: Field) => {
+			fieldName = field.name as keyof FormData;
+
+			if (data[fieldName]) {
+				field.value = data[fieldName] as Field['value'];
+			}
+		});
+	}
 
 	static override styles: CSSResult = css`
 		:host form {
