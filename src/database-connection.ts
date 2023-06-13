@@ -62,9 +62,9 @@ export class DatabaseConnection {
 	}
 
 
-	public async createUser(user: User): Promise<User | null> {
+	public async createUser(user: Partial<User>): Promise<User | null> {
 		try {
-			const response = await fetch(`${this.DB_URL}/users`, {
+			const response = await fetch(`${this.DB_URL}/users/create`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -80,10 +80,10 @@ export class DatabaseConnection {
 		}
 	}
 
-	public async updateUser(id: string, user: User): Promise<User | null> {
+	public async updateUser(id: string, user: Partial<User>): Promise<User | null> {
 		try {
 			const response = await fetch(`${this.DB_URL}/users/${id}`, {
-				method: 'POST',
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},

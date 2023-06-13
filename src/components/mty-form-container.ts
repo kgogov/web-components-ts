@@ -1,7 +1,7 @@
 import { LitElement, html, css, CSSResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { Field } from '../interfaces/Field.Interface';
-import { FormData, FormDataSchema } from '../interfaces/FormData.Interface';
+import { FormData, FormDataSchema, User } from '../interfaces/FormData.Interface';
 import { MtyFieldInput } from './mty-field-input';
 import './mty-field-input';
 import { ZodIssue } from 'zod';
@@ -14,6 +14,7 @@ import './mty-field-rating';
 import './mty-field-working-hours';
 import './mty-field-select';
 import './mty-field-multi-combobox';
+import "@ui5/webcomponents/dist/Button.js";
 import { CustomEventDetail } from '../interfaces/CustomEventDetail.Interface';
 import { DatabaseConnection } from '../database-connection';
 
@@ -23,8 +24,8 @@ export class MtyFormContainer extends LitElement {
 	constructor() {
 		super();
 
-		const formName = this.URLSearchParams.get("form");
-		const userId = this.URLSearchParams.get("id");
+		const formName: string | null = this.URLSearchParams.get("form");
+		const userId: string | null = this.URLSearchParams.get("user");
 
 		if (formName) {
 			const formStructure = this.DatabaseConnection.getFormByName(formName);
@@ -52,18 +53,6 @@ export class MtyFormContainer extends LitElement {
 	private FORM_FIELD_CLASS: string = 'mty-field';
 	private URLSearchParams: URLSearchParams = new URLSearchParams(document.location.search);
 
-	private setFormFieldsData(data: FormData) {
-		let fieldName: keyof FormData;
-
-		this.formFieldsData.forEach((field: Field) => {
-			fieldName = field.name as keyof FormData;
-
-			if (data[fieldName]) {
-				field.value = data[fieldName] as Field['value'];
-			}
-		});
-	}
-
 	static override styles: CSSResult = css`
 		:host form {
 			display: grid;
@@ -87,8 +76,25 @@ export class MtyFormContainer extends LitElement {
 		:host form .full-width {
 			grid-column: 1 / -1;
 		}
-	`;
 
+		:host form .footer-button {
+			padding: 0.5em;
+			font-size: 16px;
+			border-radius: 0.2em;
+		}
+	`;
+	
+	private setFormFieldsData(data: FormData) {
+		let fieldName: keyof FormData;
+
+		this.formFieldsData.forEach((field: Field) => {
+			fieldName = field.name as keyof FormData;
+
+			if (data[fieldName]) {
+				field.value = data[fieldName] as Field['value'];
+			}
+		});
+	}
 	public validateData() {
 		const data = this.getData();
 		const validationResult = FormDataSchema.safeParse(data);
@@ -184,6 +190,18 @@ export class MtyFormContainer extends LitElement {
 		}
 	}
 
+	private async submitForm() {
+		const userId: string | null = this.URLSearchParams.get("user");
+
+		if (userId) {
+			await this.DatabaseConnection.updateUser(userId, this.getData());
+			location.reload();
+		} else {
+			const newUser: User | null = await this.DatabaseConnection.createUser(this.getData());
+			if (newUser) window.location.replace(`${location.href}&user=${newUser.id}`);
+		}
+	}
+
 	override render() {
 		if (!this.formFieldsData.length) {
 			return html`<div>Loading...</div>`;
@@ -193,6 +211,7 @@ export class MtyFormContainer extends LitElement {
 					${this.formFieldsData.map((field: Field) => {
 						return this.renderField(field);
 					})}
+					<ui5-button design="Positive" icon="accept" class="full-width footer-button" @click=${this.submitForm}>Submit</ui5-button>
 				</form>
 			`;
 		}
